@@ -48,8 +48,8 @@ def connected(graph):
     print(graph.keys())
     for i in graph.keys():
       reachable_list = reachable(graph, i)
-      print(i)
-      print(reachable_list)
+      #print(i)
+      #print(reachable_list)
       
       for j in graph.keys():
         if j not in reachable_list:
@@ -73,12 +73,22 @@ def test_connected():
 
 
 def n_components(graph):
-    """
+  """
     Returns:
       the number of connected components in an undirected graph
     """
-    ### TODO
-    pass
+    
+  if connected(graph) == True:
+    return 1
+  else:
+    count = 0
+    remainder = set(graph.keys())
+    while remainder != 0:
+      for i in remainder:
+        reachable_list = reachable(graph, i)
+        remainder = reachable_list.difference(set(graph.keys()))
+        count +=1 
+  return count
 
 def test_n_components():
     graph = make_undirected_graph([('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'B')])
@@ -91,4 +101,4 @@ graph = make_undirected_graph([('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'B')])
 #print(graph)
 #print(sorted(reachable(graph, 'A')))
 #print(test_reachable())
-print(test_connected())
+print(test_n_components())
