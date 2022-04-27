@@ -45,7 +45,24 @@ def test_reachable():
 
 def connected(graph):
     ### TODO
-    pass
+    print(graph.keys())
+    for i in graph.keys():
+      reachable_list = reachable(graph, i)
+      print(i)
+      print(reachable_list)
+      
+      for j in graph.keys():
+        if j not in reachable_list:
+          return False
+
+    return True
+        
+         
+      
+      
+      
+      
+  
 
 def test_connected():
     graph = make_undirected_graph([('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'B')])
@@ -73,4 +90,5 @@ def test_n_components():
 graph = make_undirected_graph([('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'B')])
 #print(graph)
 #print(sorted(reachable(graph, 'A')))
-print(test_reachable())
+#print(test_reachable())
+print(test_connected())
