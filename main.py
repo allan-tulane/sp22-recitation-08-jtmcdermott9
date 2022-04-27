@@ -17,8 +17,14 @@ def reachable(graph, start_node):
     result = set([start_node])
     frontier = set([start_node])
     while len(frontier) != 0:
-        ###TODO
-        pass
+      ###TODO
+      new_node = frontier.pop()
+      result.add(new_node)
+      neighbors = graph[new_node]
+      frontier = neighbors
+      print(new_node)
+      print(neighbors)
+      
     return result
 
 def test_reachable():
@@ -58,3 +64,7 @@ def test_n_components():
 
     graph = make_undirected_graph([('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'B'), ('E', 'F'), ('F', 'G')])
     assert n_components(graph) == 2
+
+graph = make_undirected_graph([('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'B')])
+#print(graph)
+print(sorted(reachable(graph, 'A')))
