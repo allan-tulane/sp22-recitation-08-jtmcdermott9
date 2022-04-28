@@ -54,7 +54,6 @@ def connected(graph):
       for j in graph.keys():
         if j not in reachable_list:
           return False
-
     return True
         
          
@@ -77,17 +76,24 @@ def n_components(graph):
     Returns:
       the number of connected components in an undirected graph
     """
-    
+  ## This is not necessary  
   if connected(graph) == True:
     return 1
   else:
     count = 0
+    ## this is total rest nodes in the beginning
     remainder = set(graph.keys())
-    while remainder != 0:
-      for i in remainder:
-        reachable_list = reachable(graph, i)
-        remainder = reachable_list.difference(set(graph.keys()))
-        count +=1 
+    while len(remainder) != 0:
+      # for i in remainder:
+      i = remainder.pop() ## start with one node to reach out others
+      ## this output is all nodes can be reached from i
+      reachable_list = reachable(graph, i)
+      ## The rest nodes??
+      remainder = remainder - reachable_list
+      print(remainder)
+        # graph_set = set(graph.keys())
+        # remainder = graph_set.difference(reachable_list)
+      count +=1 
   return count
 
 def test_n_components():
@@ -97,8 +103,9 @@ def test_n_components():
     graph = make_undirected_graph([('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'B'), ('E', 'F'), ('F', 'G')])
     assert n_components(graph) == 2
 
-graph = make_undirected_graph([('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'B')])
+# graph = make_undirected_graph([('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'B')])
+graph = make_undirected_graph([('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'B'), ('E', 'F'), ('F', 'G')])
 #print(graph)
 #print(sorted(reachable(graph, 'A')))
 #print(test_reachable())
-print(test_n_components())
+print(n_components(graph))
